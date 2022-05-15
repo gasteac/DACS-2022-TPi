@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { PackagesService } from '../services/Packages.service';
 import { PackagesByClientService } from '../services/PackagesByClient.service';
 
@@ -9,5 +9,10 @@ export class PackagesController {
   @Delete('/:packageId')
   deletePackageById(@Param('packageId') packageId: number): string {
     return this.packageService.deletePackageById(packageId);
+  }
+
+  @Post("/")
+  CreatePackage(@Body() tourismPackage:any){
+    return this.packageService.createPackage(tourismPackage)
   }
 }
