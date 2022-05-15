@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PackagesByClientRepository } from '../repositories/PackagesByClient';
+import { PackagesByClientRepository } from '../repositories/PackagesByClient.repository';
 
 @Injectable()
 export class PackagesByClientService {
