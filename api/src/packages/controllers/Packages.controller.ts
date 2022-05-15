@@ -7,7 +7,7 @@ export class PackagesController {
   constructor(private readonly packageService: PackagesService) {}
 
   @Delete('/:packageId')
-  getBuyedPackages(@Param('packageId') packageId: number): string {
+  deletePackageById(@Param('packageId') packageId: number): string {
     return this.packageService.deletePackageById(packageId);
   }
 }
