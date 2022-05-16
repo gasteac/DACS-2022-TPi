@@ -8,4 +8,7 @@ export class PackagesService {
   deletePackageById(packageId: number): string {
     return this.packagesRepository.delete({ where: { packageId } });
   }
+  createPackage(tourismPackage:any):string{
+    return this.packagesRepository.create(tourismPackage);
+  }
 }
