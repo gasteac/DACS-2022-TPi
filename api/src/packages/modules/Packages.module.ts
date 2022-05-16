@@ -15,5 +15,6 @@ import { PackagesByClientService } from '../services/PackagesByClient.service';
     PackagesService,
     PackagesRepository,
   ],
+  exports: [PackagesByClientService],
 })
 export class PackagesModule {}
