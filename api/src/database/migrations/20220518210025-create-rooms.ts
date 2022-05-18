@@ -9,16 +9,19 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       numBeds: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       description: {
         type: Sequelize.STRING
       },
       amount: {
-        type: Sequelize.REAL
+        type: Sequelize.REAL,
+        allowNull: false,
       },
       type: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
     });
   },

@@ -1,44 +1,43 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('UserPacks', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
-        type: Sequelize.STRING,
+      subTotal: {
+        type: Sequelize.REAL,
         allowNull: false,
       },
-      lastName: {
-        type: Sequelize.STRING,
+      pending: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: true,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      roleId: {
+
+      userId: {
         type: Sequelize.INTEGER,
         references: {
-          model: {
-            tableName: 'Rols',
-          },
+          model: 'Users',
           key: 'id',
         },
         allowNull: false,
-        defaultValue: 1,
+      },
+
+      packId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Packs',
+          key: 'id',
+        },
+        allowNull: false,
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('UserPacks');
   },
 };

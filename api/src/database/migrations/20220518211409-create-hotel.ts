@@ -10,12 +10,15 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       address: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       phone: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       reserveId: {
         type: Sequelize.INTEGER,
@@ -25,6 +28,7 @@ module.exports = {
           },
           key: 'id',
         },
+        allowNull: false,
       },
     });
   },

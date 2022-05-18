@@ -9,16 +9,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       seat: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       dateShow: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false,
       },
       amount: {
-        type: Sequelize.REAL
+        type: Sequelize.REAL,
+        allowNull: false,
       },
     });
   },

@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       seat: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       departureDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false,
       },
       returnDate: {
         type: Sequelize.DATE
@@ -21,9 +23,11 @@ module.exports = {
         type: Sequelize.INTEGER,references:{model:{tableName:'Travelways'},
         key: 'id'
       },
+      allowNull: false,
       },
       amount: {
-        type: Sequelize.REAL
+        type: Sequelize.REAL,
+        allowNull: false,
       },
     });
   },

@@ -10,6 +10,8 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
+
       },
 
       ticketId: {

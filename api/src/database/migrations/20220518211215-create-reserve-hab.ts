@@ -10,9 +10,11 @@ module.exports = {
       },
       departureDate: {
         type: Sequelize.DATE,
+        allowNull: false,
       },
       returnDate: {
         type: Sequelize.DATE,
+        allowNull: false,
       },
       roomId: {
         type: Sequelize.INTEGER,
@@ -22,6 +24,7 @@ module.exports = {
           },
           key: 'id',
         },
+        allowNull: false,
       },
     });
   },
