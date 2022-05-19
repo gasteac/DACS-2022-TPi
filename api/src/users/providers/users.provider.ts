@@ -1,4 +1,4 @@
-import { User } from "../entitities/users.entity";
+import { User } from '../entitities/users.entity';
 
 export const UserProvider = [
   {

@@ -1,7 +1,5 @@
-import { Table, Column, Model, HasMany, HasOne, Unique, ForeignKey } from 'sequelize-typescript';
-import { Rol } from './rols.entity';
-
-
+import { Table, Column, Model, Unique, ForeignKey } from 'sequelize-typescript';
+import { Role } from './rols.entity';
 
 @Table({ tableName: 'Users', timestamps: false })
 export class User extends Model {
@@ -21,14 +19,13 @@ export class User extends Model {
   @Column
   password: string;
 
-  @ForeignKey(() => Rol)
+  @Column
+  cuit: string;
+
+  @ForeignKey(() => Role)
   @Column
   roleId: number;
 
-//   @HasOne(() => Rol)
-//   role: Rol;
-
-
-
-  
+  //   @HasOne(() => Rol)
+  //   role: Rol;
 }
