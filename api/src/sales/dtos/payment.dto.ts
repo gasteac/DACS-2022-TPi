@@ -1,7 +1,8 @@
-import { ValidateNested } from 'class-validator';
+import { IsNotEmpty, ValidateNested } from 'class-validator';
 import { CardPaymentDto } from './cardPayment.dto';
 
 export class PaymentDto {
   @ValidateNested()
-  cardPayment: CardPaymentDto;
+  @IsNotEmpty()
+  payment: CardPaymentDto;
 }
