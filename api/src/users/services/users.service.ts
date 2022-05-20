@@ -14,6 +14,10 @@ export class UserService {
     return await this.userRepository.findOne(options);
   }
 
+  async findAll(userId: number): Promise<User[]> {
+    return this.userRepository.findAll({ where: { userId } });
+  }
+
   async create(user: CreateUserDto): Promise<User> {
     let { roleId } = user;
     const roles = await this.roleService.findAll();
