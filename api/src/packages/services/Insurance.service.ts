@@ -1,15 +1,15 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { NotFoundError } from 'rxjs';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { InsuranceDto } from '../dtos/Insurances.dto';
 import { Insurance } from '../entitities/insurances.entity';
 
 @Injectable()
 export class InsuranceService {
   constructor(
-    @Inject('INSURANCES_REPOSITORY')
+    @Inject('INSURANCE_REPOSITORY')
     private insuranceRepository: typeof Insurance,
   ) {}
 
-  async create(insurance: Insurance): Promise<Insurance> {
+  async create(insurance: InsuranceDto): Promise<Insurance> {
     const newInsurance = new Insurance({ ...insurance });
     await newInsurance.save();
     return newInsurance;
@@ -20,7 +20,7 @@ export class InsuranceService {
       where: { id },
     });
     if (!insurance) {
-      throw new NotFoundError('Insurance not found');
+      throw new NotFoundException('Insurance not found');
     }
     await insurance.destroy();
     return insurance;

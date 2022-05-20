@@ -16,8 +16,8 @@ export class PackagesController {
   //   return this.packageService.createPackage(tourismPackage);
   // }
 
-  @Post('/insurances')
-  createInsurance(@Body() insurance: any) {
-    return this.packageService.createInsurance(insurance);
-  }
+  // @Post('/insurances')
+  // createInsurance(@Body() insurance: any) {
+  //   return this.packageService.createInsurance(insurance);
+  // }
 }

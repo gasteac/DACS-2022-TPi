@@ -5,7 +5,7 @@ import { InsuranceService } from './Insurance.service';
 
 @Injectable()
 export class PackagesService {
-  constructor(private insuranceService: InsuranceService) {}
+  // constructor(private insuranceService: InsuranceService) {}
 
   // deletePackageById(packageId: number): string {
   //   return this.packagesRepository.delete({ where: { packageId } });
@@ -14,7 +14,7 @@ export class PackagesService {
   //   return this.packagesRepository.create(tourismPackage);
   // }
 
-  createInsurance(insurance: any): Promise<Insurance> {
-    return this.insuranceService.create(insurance);
-  }
+  // createInsurance(insurance: any): Promise<Insurance> {
+  //   return this.insuranceService.create(insurance);
+  // }
 }

@@ -7,17 +7,17 @@ import { PackagesByClientRepository } from '../repositories/PackagesByClient.rep
 import { InsuranceService } from '../services/Insurance.service';
 import { PackagesService } from '../services/Packages.service';
 import { PackagesByClientService } from '../services/PackagesByClient.service';
+import { InsurancesModule } from './Insurances.module';
+import { ShowsModule } from './Shows.module';
 
 @Module({
-  imports: [],
+  imports: [InsurancesModule, ShowsModule],
   controllers: [PackagesByClientController, PackagesController],
   providers: [
     PackagesByClientService,
     PackagesByClientRepository,
     PackagesService,
     PackagesRepository,
-    ...InsuranceProvider,
-    InsuranceService,
   ],
 })
 export class PackagesModule {}
