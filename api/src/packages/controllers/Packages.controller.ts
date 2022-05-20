@@ -6,13 +6,18 @@ import { PackagesByClientService } from '../services/PackagesByClient.service';
 export class PackagesController {
   constructor(private readonly packageService: PackagesService) {}
 
-  @Delete('/:packageId')
-  deletePackageById(@Param('packageId') packageId: number): string {
-    return this.packageService.deletePackageById(packageId);
-  }
+  // @Delete('/:packageId')
+  // deletePackageById(@Param('packageId') packageId: number): string {
+  //   return this.packageService.deletePackageById(packageId);
+  // }
 
-  @Post("/")
-  CreatePackage(@Body() tourismPackage:any){
-    return this.packageService.createPackage(tourismPackage)
+  // @Post('/')
+  // CreatePackage(@Body() tourismPackage: any) {
+  //   return this.packageService.createPackage(tourismPackage);
+  // }
+
+  @Post('/insurances')
+  createInsurance(@Body() insurance: any) {
+    return this.packageService.createInsurance(insurance);
   }
 }
