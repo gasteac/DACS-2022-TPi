@@ -13,6 +13,12 @@ export class HotelService {
     return this.hotelRepository.findAll();
   }
 
+  async findOne(id: number): Promise<Hotel> {
+    return await this.hotelRepository.findOne({
+      where: { id },
+    });
+  }
+
   async create(hotel: HotelDto): Promise<Hotel> {
     const newHotel = new Hotel({ ...hotel });
     await newHotel.save();
