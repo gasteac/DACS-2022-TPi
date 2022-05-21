@@ -7,6 +7,6 @@ import { HotelService } from '../services/Hotel.service';
   imports: [],
   controllers: [HotelController],
   providers: [...HotelProvider, HotelService],
-  exports: [HotelService],
+  exports: [],
 })
 export class HotelsModule {}

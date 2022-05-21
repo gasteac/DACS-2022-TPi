@@ -16,10 +16,6 @@ export class TicketService {
     private travelWaysService: TravelWaysService,
   ) {}
 
-  async findOne(id: number): Promise<Ticket> {
-    return await this.ticketRepository.findOne({ where: { id } });
-    }
-
   async findAll(): Promise<Ticket[]> {
     return await this.ticketRepository.findAll({ include: TravelWay });
   }

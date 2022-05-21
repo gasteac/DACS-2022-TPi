@@ -9,10 +9,6 @@ export class ShowsService {
     private showRepository: typeof Show,
   ) {}
 
-  async findOne(id: number): Promise<Show> {
-    return await this.showRepository.findByPk(id);
-  }
-
   async create(show: ShowDto): Promise<Show> {
     const newShow = new Show({ ...show });
     await newShow.save();

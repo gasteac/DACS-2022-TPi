@@ -15,12 +15,6 @@ export class InsuranceService {
     return newInsurance;
   }
 
-  async findOne(id: number): Promise<Insurance> {
-    return await this.insuranceRepository.findOne({
-        where: { id },
-    });
-    }
-
   async delete(id: number): Promise<Insurance> {
     const insurance = await this.insuranceRepository.findOne({
       where: { id },
