@@ -14,5 +14,6 @@ import { TravelWaysService } from '../services/TravelWays.service';
     ...TicketProvider,
     ...TravelWaysProvider,
   ],
+  exports: [TicketService],
 })
 export class TicketsModule {}

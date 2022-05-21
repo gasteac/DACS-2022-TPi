@@ -18,6 +18,9 @@ export class Pack extends Model {
   @Column
   name: string;
 
+  @Column
+  total: number;
+
   @ForeignKey(() => Hotel)
   @Column
   hotelId: number;
