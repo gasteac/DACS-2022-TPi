@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { PaymentDto } from '../dtos/payment.dto';
 import { Sale } from '../entitities/sale.entity';
 import { PaymentService } from './payment.service';
 
@@ -10,8 +9,8 @@ export class SalesService {
     @Inject('SALE_REPOSITORY') private saleRepository: typeof Sale,
   ) {}
 
-  async findAll(): Promise<Sale[]> {
-    return this.saleRepository.findAll();
+  async findAll(options: any): Promise<Sale[]> {
+    return this.saleRepository.findAll({ ...options });
   }
 
   async findAllByUserId(userId: number) {

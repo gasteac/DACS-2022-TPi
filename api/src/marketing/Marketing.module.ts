@@ -6,11 +6,14 @@ import { ConfigService, ConfigModule } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { join } from 'path';
+import { SaleModule } from 'src/sales/sales.module';
+import { MarketingController } from './controllers/Marketing.controller';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
     PackagesModule,
+    SaleModule,
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
@@ -39,7 +42,7 @@ import { join } from 'path';
     }),
     ConfigModule.forRoot(),
   ],
-  controllers: [],
+  controllers: [MarketingController],
   providers: [MarketingService],
 })
 export class MarketingModule {}
