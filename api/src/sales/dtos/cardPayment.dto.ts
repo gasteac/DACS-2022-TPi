@@ -20,7 +20,7 @@ export class CardPaymentDto {
 
   @IsString()
   @IsNotEmpty()
-  name: string;
+  ownerName: string;
 
   @IsString()
   @IsNotEmpty()
@@ -29,4 +29,8 @@ export class CardPaymentDto {
   @IsString()
   @IsNotEmpty()
   paymentMethod: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  amount: number;
 }

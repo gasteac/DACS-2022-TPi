@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { SaleModule } from 'src/sales/sales.module';
+import { UsersModule } from 'src/users/users.module';
 import { PackagesController } from '../controllers/Packages.controller';
 import { PackagesByClientController } from '../controllers/PackagesByClientController.controller';
 import { InsuranceProvider } from '../providers/insurance.provider';
@@ -14,7 +16,14 @@ import { ShowsModule } from './Shows.module';
 import { TicketsModule } from './Tickets.module';
 
 @Module({
-  imports: [InsurancesModule, ShowsModule, HotelsModule, TicketsModule],
+  imports: [
+    InsurancesModule,
+    ShowsModule,
+    HotelsModule,
+    TicketsModule,
+    UsersModule,
+    SaleModule,
+  ],
   controllers: [PackagesByClientController, PackagesController],
   providers: [
     PackagesByClientService,
