@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SaleModule } from 'src/sales/sales.module';
+import { ControlTourismModule } from 'src/tourismControl/controlTourism.module';
 import { UsersModule } from 'src/users/users.module';
 import { PackagesController } from '../controllers/Packages.controller';
 import { PackagesByClientController } from '../controllers/PackagesByClientController.controller';
@@ -23,6 +24,7 @@ import { TicketsModule } from './Tickets.module';
     TicketsModule,
     UsersModule,
     SaleModule,
+    ControlTourismModule
   ],
   controllers: [PackagesByClientController, PackagesController],
   providers: [
