@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { Dialect } from 'sequelize/types';
 import { Hotel } from 'src/packages/entitities/hotel.entity';
 import { Insurance } from 'src/packages/entitities/insurances.entity';
+import { Pack } from 'src/packages/entitities/packages.entity';
 import { Reserve } from 'src/packages/entitities/reserve.entity';
 import { Room } from 'src/packages/entitities/rooms.entity';
 import { Show } from 'src/packages/entitities/shows.entity';
@@ -31,6 +32,7 @@ export const DatabaseProviders = [
         Room,
         Ticket,
         TravelWay,
+        Pack,
       ]);
       await sequelize.sync();
       return sequelize;

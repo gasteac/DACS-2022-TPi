@@ -20,4 +20,8 @@ export class PackagesController {
   // createInsurance(@Body() insurance: any) {
   //   return this.packageService.createInsurance(insurance);
   // }
+  @Get()
+  getAllPackages() {
+    return this.packageService.findAll();
+  }
 }
