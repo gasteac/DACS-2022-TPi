@@ -9,7 +9,7 @@ export class UserController {
 
   @Get('/:id')
   getUsers(@Request() req, @Param('id') id: number) {
-    return this.userService.findOne({where: { userId: id }}); 
+    return this.userService.findOne(id); 
   }
 
   @Post()
