@@ -34,5 +34,6 @@ import { TicketsModule } from './Tickets.module';
     PackagesRepository,
     ...PackProvider,
   ],
+  exports: [PackagesByClientService],
 })
 export class PackagesModule {}
