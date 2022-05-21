@@ -6,9 +6,8 @@ import { UserService } from '../services/users.service';
 export class UserController {
   constructor(private userService: UserService) {}
 
-
   @Get('/:id')
-  getUsers(@Request() req, @Param('id') id: number) {
+  getUser(@Request() req, @Param('id') id: number) {
     return this.userService.findOne(id); 
   }
 

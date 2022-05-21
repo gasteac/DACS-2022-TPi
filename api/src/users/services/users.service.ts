@@ -10,13 +10,13 @@ export class UserService {
     private roleService: RoleService,
   ) {}
 
-  async findOne(options: any): Promise<User> {
-    return await this.userRepository.findOne({where: {options}});
+  async findOne(id: number): Promise<User> {
+    return await this.userRepository.findOne({where: {id}});
   }
 
-  async findAll(userId: number): Promise<User[]> {
-    return this.userRepository.findAll({ where: { userId } });
-  }
+  // async findAll(id: number): Promise<User[]> {
+  //   return this.userRepository.findAll({ where: { id } });
+  // }
 
   async create(user: CreateUserDto): Promise<User> {
     let { roleId } = user;
