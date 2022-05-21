@@ -1,4 +1,4 @@
-import { Table, Column, Model, Unique, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, Unique, ForeignKey, HasOne } from 'sequelize-typescript';
 import { Role } from './rols.entity';
 
 @Table({ tableName: 'Users', timestamps: false })
@@ -26,6 +26,6 @@ export class User extends Model {
   @Column
   roleId: number;
 
-  //   @HasOne(() => Rol)
-  //   role: Rol;
+  // @HasOne(() => Role)
+  // role: Role;
 }

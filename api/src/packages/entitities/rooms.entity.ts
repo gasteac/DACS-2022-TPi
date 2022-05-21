@@ -1,4 +1,5 @@
-import { Table, Model, Column, Unique } from 'sequelize-typescript';
+import { Table, Model, Column, Unique, ForeignKey } from 'sequelize-typescript';
+import { Hotel } from './hotel.entity';
 
 @Table({ tableName: 'Rooms', timestamps: false })
 export class Room extends Model {
@@ -16,6 +17,9 @@ export class Room extends Model {
 
   @Column
   type: string;
+
+  @Column
+  roomNumber: number;
 
   //   @HasOne(() => Rol)
   //   role: Rol;
