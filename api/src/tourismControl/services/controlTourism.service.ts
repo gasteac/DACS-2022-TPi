@@ -29,7 +29,7 @@ export class ControlTourismService {
         }),
         retry(10),
         catchError((err) => {
-          return of({ statusCode: err });
+          return of({ status: err.response.status });
         }),
       );
   }
@@ -39,7 +39,7 @@ export class ControlTourismService {
     if (response.aprobada) {
       return true;
     }
-    if (response.statusCode >= 400) {
+    if (response.status >= 400) {
       throw new InternalServerErrorException('Max re-try Exceded');
     }
     return false;
