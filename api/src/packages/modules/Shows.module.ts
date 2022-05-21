@@ -7,6 +7,6 @@ import { ShowsService } from '../services/Shows.service';
   imports: [],
   controllers: [ShowsController],
   providers: [...ShowsProvider, ShowsService],
-  exports: [],
+  exports: [ShowsService],
 })
 export class ShowsModule {}
