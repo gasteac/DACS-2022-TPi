@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { PackageDto } from '../dtos/Package.dto';
 import { PackagesService } from '../services/Packages.service';
 import { PackagesByClientService } from '../services/PackagesByClient.service';
 
@@ -23,5 +24,15 @@ export class PackagesController {
   @Get()
   getAllPackages() {
     return this.packageService.findAll();
+  }
+
+  @Post()
+  createPackage(@Body() tourismPackage: PackageDto) {
+    return this.packageService.create(tourismPackage);
+  }
+
+  @Delete('/:packageId')
+  deletePackageById(@Param('packageId') packageId: number) {
+    return this.packageService.delete(packageId);
   }
 }
