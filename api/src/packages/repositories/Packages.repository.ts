@@ -27,4 +27,7 @@ export class PackagesRepository {
     }
     return "Package doesn't exist";
   }
+  create(tourimsPackage: any): any{
+    return "paquete creado con exito";
+  }
 }
