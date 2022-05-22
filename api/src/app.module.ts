@@ -7,6 +7,7 @@ import { PackagesModule } from './packages/modules/Packages.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { MarketingModule } from './marketing/Marketing.module';
+import { SaleModule } from './sales/sales.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { MarketingModule } from './marketing/Marketing.module';
     UsersModule,
     MarketingModule,
     DatabaseModule,
+    SaleModule,
     ConfigModule.forRoot(),
   ],
   controllers: [AppController],

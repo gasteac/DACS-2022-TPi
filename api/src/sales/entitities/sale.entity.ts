@@ -1,5 +1,5 @@
 import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
-import { Pack } from 'src/packages/entitities/packages.entity';
+import { Package } from 'src/packages/entitities/packages.entity';
 import { User } from 'src/users/entitities/users.entity';
 
 @Table({ tableName: 'Sales', timestamps: false })
@@ -20,13 +20,7 @@ export class Sale extends Model {
   @Column
   userId: number;
 
-  @ForeignKey(() => Pack)
+  @ForeignKey(() => Package)
   @Column
   packId: number;
-
-  @BelongsTo(() => User)
-  user: User;
-
-  @BelongsTo(() => Pack)
-  pack: Pack;
 }

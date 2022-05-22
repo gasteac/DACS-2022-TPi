@@ -1,5 +1,14 @@
-import { Table, Column, Model, Unique, ForeignKey, HasOne, BelongsToMany } from 'sequelize-typescript';
-import { Pack } from 'src/packages/entitities/packages.entity';
+import {
+  Table,
+  Column,
+  Model,
+  Unique,
+  ForeignKey,
+  HasOne,
+  BelongsToMany,
+} from 'sequelize-typescript';
+import { Package } from 'src/packages/entitities/packages.entity';
+import { ReservedPackages } from 'src/packages/entitities/reservedPackages.entity';
 import { Sale } from 'src/sales/entitities/sale.entity';
 import { Role } from './rols.entity';
 
@@ -28,8 +37,11 @@ export class User extends Model {
   @Column
   roleId: number;
 
-  @BelongsToMany(() => Pack, () => Sale)
-  sales: Pack[];
+  @BelongsToMany(() => Package, () => Sale)
+  sales: Package[];
+
+  @BelongsToMany(() => Package, () => ReservedPackages)
+  reserves: Package[];
 
   // @HasOne(() => Role)
   // role: Role;

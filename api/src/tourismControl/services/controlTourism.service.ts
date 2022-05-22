@@ -8,7 +8,7 @@ import { HttpBodyRequestComptroller } from '../interfaces/HttpBodyRequestComptro
 export class ControlTourismService {
   constructor(private httpService: HttpService) {}
 
-  httpComptralor(req: HttpBodyRequestComptroller): Observable<any> {
+  httpComptroller(req: HttpBodyRequestComptroller): Observable<any> {
     return this.httpService
       .post(
         'http://localhost:8080/operacion',
@@ -35,7 +35,7 @@ export class ControlTourismService {
   }
 
   async validate(req: HttpBodyRequestComptroller): Promise<boolean> {
-    const response = await this.httpComptralor(req).toPromise();
+    const response = await this.httpComptroller(req).toPromise();
     if (response.aprobada) {
       return true;
     }

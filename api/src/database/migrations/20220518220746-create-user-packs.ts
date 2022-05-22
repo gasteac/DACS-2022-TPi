@@ -1,13 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('UserPacks', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
+    await queryInterface.createTable('PackageBookings', {
       subTotal: {
         type: Sequelize.REAL,
         allowNull: false,
@@ -20,6 +14,7 @@ module.exports = {
 
       userId: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         references: {
           model: 'Users',
           key: 'id',
@@ -29,8 +24,9 @@ module.exports = {
 
       packId: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         references: {
-          model: 'Packs',
+          model: 'Packages',
           key: 'id',
         },
         allowNull: false,

@@ -3,14 +3,15 @@ import { SaleModule } from 'src/sales/sales.module';
 import { ControlTourismModule } from 'src/tourismControl/controlTourism.module';
 import { UsersModule } from 'src/users/users.module';
 import { PackagesController } from '../controllers/Packages.controller';
-import { PackagesByClientController } from '../controllers/PackagesByClientController.controller';
+import { ReservedPackagesController } from '../controllers/ReservedPackages.controller';
 import { InsuranceProvider } from '../providers/insurance.provider';
-import { PackProvider } from '../providers/package.provider';
+import { PackageProvider } from '../providers/package.provider';
+import { ReservedPackagesProvider as ReservedPackagesProvider } from '../providers/reservedPackages.provider';
 import { PackagesRepository } from '../repositories/Packages.repository';
 import { PackagesByClientRepository } from '../repositories/PackagesByClient.repository';
 import { InsuranceService } from '../services/Insurance.service';
 import { PackagesService } from '../services/Packages.service';
-import { PackagesByClientService } from '../services/PackagesByClient.service';
+import { ReservedPackagesService } from '../services/ReservedPackages.service';
 import { HotelsModule } from './Hotels.module';
 import { InsurancesModule } from './Insurances.module';
 import { ShowsModule } from './Shows.module';
@@ -23,17 +24,14 @@ import { TicketsModule } from './Tickets.module';
     HotelsModule,
     TicketsModule,
     UsersModule,
-    SaleModule,
-    ControlTourismModule
   ],
-  controllers: [PackagesByClientController, PackagesController],
+  controllers: [ReservedPackagesController, PackagesController],
   providers: [
-    PackagesByClientService,
-    PackagesByClientRepository,
+    ReservedPackagesService,
     PackagesService,
-    PackagesRepository,
-    ...PackProvider,
+    ...PackageProvider,
+    ...ReservedPackagesProvider,
   ],
-  exports: [PackagesByClientService],
+  exports: [ReservedPackagesService, PackagesService],
 })
 export class PackagesModule {}

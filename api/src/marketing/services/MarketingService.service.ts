@@ -1,10 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, Interval, Timeout } from '@nestjs/schedule';
-import { PackagesByClientService } from 'src/packages/services/PackagesByClient.service';
+import { ReservedPackagesService } from 'src/packages/services/ReservedPackages.service';
 import { MailerService } from '@nestjs-modules/mailer';
 import { SalesService } from 'src/sales/services/sales.service';
 import { User } from 'src/users/entitities/users.entity';
-import { Pack } from 'src/packages/entitities/packages.entity';
+import { Package } from 'src/packages/entitities/packages.entity';
 import { Hotel } from 'src/packages/entitities/hotel.entity';
 import { Ticket } from 'src/packages/entitities/tickets.entity';
 import { Op, Sequelize } from 'sequelize';
@@ -31,14 +31,15 @@ export class MarketingService {
     });
   }
 
-  @Timeout(10000)
+  // @Timeout(10000)
   async handleNotifications() {
     const date = new Date();
     date.setDate(date.getDate() + 20);
     const salesByUser = await this.userService.findAll({
       include: [
         {
-          model: Pack,
+          model: Package,
+          as: 'sales',
           include: [
             {
               model: Ticket,

@@ -10,10 +10,7 @@ import {
 import { CardPaymentDto } from 'src/sales/dtos/cardPayment.dto';
 import { PaymentDto } from 'src/sales/dtos/payment.dto';
 
-export class PackagesByClientDto {
-  @IsNumber()
-  userId: number;
-
+export class CreateSaleDto {
   @IsNumber()
   packageId: number;
 

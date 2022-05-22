@@ -17,7 +17,9 @@ export class TravelWaysService {
   }
 
   async create(travelWay: any): Promise<TravelWay> {
-    const newTravelWay = new TravelWay({ ...travelWay });
+    const newTravelWay = await this.travelWaysRepository.create({
+      ...travelWay,
+    });
     await newTravelWay.save();
     return newTravelWay;
   }

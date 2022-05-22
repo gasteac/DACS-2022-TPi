@@ -14,7 +14,7 @@ export class ShowsService {
   }
 
   async create(show: ShowDto): Promise<Show> {
-    const newShow = new Show({ ...show });
+    const newShow = await this.showRepository.create({ ...show });
     await newShow.save();
     return newShow;
   }
