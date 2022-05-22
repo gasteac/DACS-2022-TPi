@@ -8,23 +8,25 @@ import { Package } from 'src/packages/entitities/packages.entity';
 import { Hotel } from 'src/packages/entitities/hotel.entity';
 import { Ticket } from 'src/packages/entitities/tickets.entity';
 import { Op, Sequelize } from 'sequelize';
+import { UserService } from 'src/users/services/users.service';
+import { Sale } from 'src/sales/entitities/sale.entity';
 
 @Injectable()
 export class MarketingService {
   private readonly logger = new Logger(MarketingService.name);
   constructor(
-    private saleService: SalesService,
+    private userService: UserService,
     private mailerService: MailerService,
   ) {}
 
-  async sendMail(email: string, name: string, pack: Pack) {
+  async sendMail(email: string, name: string, packs: any[]) {
     await this.mailerService.sendMail({
       to: email,
-      subject: 'Dont forget your Package',
+      subject: 'Dont forget your Packages',
       template: '/email',
       context: {
         name: name,
-        pack: pack.name,
+        show_packs: packs,
       },
     });
   }
@@ -33,11 +35,8 @@ export class MarketingService {
   async handleNotifications() {
     const date = new Date();
     date.setDate(date.getDate() + 20);
-    const sales = await this.saleService.findAll({
-      where: { paymentMethod: 'card' },
-      group: ['userId'],
+    const salesByUser = await this.userService.findAll({
       include: [
-        User,
         {
           model: Package,
           as: 'sales',
@@ -54,10 +53,10 @@ export class MarketingService {
         },
       ],
     });
-    sales.forEach(async (sale) => {
-      const { user, pack } = sale;
-      const { email, firstName, lastName } = user;
-      await this.sendMail(email, `${firstName} ${lastName}`, pack);
+    salesByUser.forEach(async (user) => {
+      const { email, firstName, lastName, sales } = user;
+      const packs = sales.map((sale) => sale.name);
+      await this.sendMail(email, `${firstName} ${lastName}`, packs);
     });
     this.logger.debug('Called in intervals of 10 seconds');
   }

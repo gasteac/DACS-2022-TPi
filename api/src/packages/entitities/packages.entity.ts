@@ -1,10 +1,13 @@
 import {
   BelongsTo,
+  BelongsToMany,
   Column,
   ForeignKey,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Sale } from 'src/sales/entitities/sale.entity';
+import { User } from 'src/users/entitities/users.entity';
 import { Hotel } from './hotel.entity';
 import { Insurance } from './insurances.entity';
 import { ReservedPackages } from './reservedPackages.entity';
