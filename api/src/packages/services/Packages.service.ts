@@ -1,11 +1,10 @@
 import { Injectable, Inject, UnauthorizedException, NotFoundException } from '@nestjs/common';
 import { Hotel } from '../entitities/hotel.entity';
 import { Insurance } from '../entitities/insurances.entity';
-import { Pack } from '../entitities/packages.entity';
+import { Package } from '../entitities/packages.entity';
 import { Show } from '../entitities/shows.entity';
 import { Ticket } from '../entitities/tickets.entity';
 import { TravelWay } from '../entitities/travelWays.entity';
-import { PackagesRepository } from '../repositories/Packages.repository';
 import { HotelService } from './Hotel.service';
 import { InsuranceService } from './Insurance.service';
 import { ShowsService } from './Shows.service';
@@ -14,14 +13,14 @@ import { TicketService } from './Ticket.service';
 @Injectable()
 export class PackagesService {
   constructor(
-    @Inject('PACK_REPOSITORY') private packagesRepository: typeof Pack,
+    @Inject('PACKAGE_REPOSITORY') private packagesRepository: typeof Package,
     private insuranceService: InsuranceService,
     private ticketService: TicketService,
     private hotelService: HotelService,
     private showService: ShowsService,
   ) {}
 
-  async findAll(): Promise<Pack[]> {
+  async findAll(): Promise<Package[]> {
     return await this.packagesRepository.findAll({
       include: [
         Insurance,
@@ -32,7 +31,7 @@ export class PackagesService {
     });
   }
 
-  async create(pack: any): Promise<Pack> {
+  async create(pack: any): Promise<Package> {
     const { insuranceId, ticketId, hotelId, showId } = pack;
     let total = 0;
     if (insuranceId) {
@@ -62,20 +61,20 @@ export class PackagesService {
         throw new UnauthorizedException('Invalid show');
       }
     }
-    const newPack = new Pack({ ...pack, total });
+    const newPack = await this.packagesRepository.create({ ...pack, total });
     await newPack.save();
     return newPack;
   }
-  async delete(id: number): Promise<Pack> {
+  async delete(id: number): Promise<Package> {
     const pack = await this.packagesRepository.findOne({ where: { id } });
     if (!pack) {
-      throw new NotFoundException('Pack does not exist');
+      throw new NotFoundException('Package does not exist');
     }
     await pack.destroy();
     return pack;
   }
 
-  async findOne(id: number): Promise<Pack> {
+  async findOne(id: number): Promise<Package> {
     return await this.packagesRepository.findOne({
       where: { id },
       include: [

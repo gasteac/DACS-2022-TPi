@@ -34,7 +34,7 @@ module.exports = {
       packId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Packs',
+          model: 'Packages',
           key: 'id',
         },
         allowNull: false,

@@ -10,16 +10,18 @@ export class InsuranceService {
   ) {}
 
   async create(insurance: InsuranceDto): Promise<Insurance> {
-    const newInsurance = new Insurance({ ...insurance });
+    const newInsurance = await this.insuranceRepository.create({
+      ...insurance,
+    });
     await newInsurance.save();
     return newInsurance;
   }
 
   async findOne(id: number): Promise<Insurance> {
     return await this.insuranceRepository.findOne({
-        where: { id },
+      where: { id },
     });
-    }
+  }
 
   async delete(id: number): Promise<Insurance> {
     const insurance = await this.insuranceRepository.findOne({

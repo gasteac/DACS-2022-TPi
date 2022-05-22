@@ -7,11 +7,12 @@ import {
 } from 'sequelize-typescript';
 import { Hotel } from './hotel.entity';
 import { Insurance } from './insurances.entity';
+import { ReservedPackages } from './reservedPackages.entity';
 import { Show } from './shows.entity';
 import { Ticket } from './tickets.entity';
 
-@Table({ tableName: 'Packs', timestamps: false })
-export class Pack extends Model {
+@Table({ tableName: 'Packages', timestamps: false })
+export class Package extends Model {
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
 
@@ -20,6 +21,9 @@ export class Pack extends Model {
 
   @Column
   total: number;
+
+  @Column
+  quantPeople: number;
 
   @ForeignKey(() => Hotel)
   @Column
@@ -48,4 +52,10 @@ export class Pack extends Model {
 
   @BelongsTo(() => Show)
   show: Show;
+
+  @BelongsToMany(() => User, () => Sale)
+  sales: User[];
+
+  @BelongsToMany(() => User, () => ReservedPackages)
+  reserves: User[];
 }

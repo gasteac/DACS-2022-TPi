@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { PackageDto } from '../dtos/Package.dto';
 import { PackagesService } from '../services/Packages.service';
-import { PackagesByClientService } from '../services/PackagesByClient.service';
+import { ReservedPackagesService } from '../services/ReservedPackages.service';
 
 @Controller('/packages')
 export class PackagesController {

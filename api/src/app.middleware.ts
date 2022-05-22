@@ -6,7 +6,7 @@ export class LoggerMiddleware implements NestMiddleware {
   use(req: any, res: Response, next: NextFunction) {
     // Mientras tanto vamos a utilizar un id de un cliente en específico,
     // luego este id lo vamos a obtener del token de autenticación
-    req.clientId = 1;
+    req.userId = 1;
     next();
   }
 }

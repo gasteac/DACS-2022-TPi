@@ -4,6 +4,9 @@ export class PackageDto {
   @IsString()
   name: string;
 
+  @IsNumber()
+  quantPeople: number;
+
   @IsOptional()
   @IsNumber()
   hotelId: number;

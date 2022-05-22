@@ -1,8 +1,8 @@
-import { Pack } from '../entitities/packages.entity';
+import { Package as Package } from '../entitities/packages.entity';
 
-export const PackProvider = [
+export const PackageProvider = [
   {
-    provide: 'PACK_REPOSITORY',
-    useValue: Pack,
+    provide: 'PACKAGE_REPOSITORY',
+    useValue: Package,
   },
 ];

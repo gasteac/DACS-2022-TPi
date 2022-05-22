@@ -20,7 +20,7 @@ export class HotelService {
   }
 
   async create(hotel: HotelDto): Promise<Hotel> {
-    const newHotel = new Hotel({ ...hotel });
+    const newHotel = await this.hotelRepository.create({ ...hotel });
     await newHotel.save();
     return newHotel;
   }

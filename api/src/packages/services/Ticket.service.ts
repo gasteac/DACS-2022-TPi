@@ -18,7 +18,7 @@ export class TicketService {
 
   async findOne(id: number): Promise<Ticket> {
     return await this.ticketRepository.findOne({ where: { id } });
-    }
+  }
 
   async findAll(): Promise<Ticket[]> {
     return await this.ticketRepository.findAll({ include: TravelWay });
@@ -42,7 +42,7 @@ export class TicketService {
     if (!travelWays.find((travelWay) => travelWay.id === travelWayId)) {
       throw new UnauthorizedException('Invalid travel way');
     }
-    const newTicket = new Ticket({ ...ticket });
+    const newTicket = await this.ticketRepository.create({ ...ticket });
     await newTicket.save();
     return newTicket;
   }
