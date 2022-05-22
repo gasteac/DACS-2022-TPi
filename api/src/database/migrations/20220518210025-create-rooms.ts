@@ -6,14 +6,14 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       numBeds: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       amount: {
         type: Sequelize.REAL,
@@ -27,5 +27,5 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Rooms');
-  }
+  },
 };

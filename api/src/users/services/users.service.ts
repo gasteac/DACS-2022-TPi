@@ -9,11 +9,17 @@ export class UserService {
     @Inject('USER_REPOSITORY') private userRepository: typeof User,
     private roleService: RoleService,
   ) {}
-
+  
   async findOne(id: number): Promise<User> {
     return await this.userRepository.findOne({where: {id}});
-  }
 
+  //  async findOne(options: any): Promise<User> {
+  //  return await this.userRepository.findOne(options);
+
+  async findAll(options: any): Promise<User[]> {
+    return await this.userRepository.findAll(options);
+  }
+  
   // async findAll(id: number): Promise<User[]> {
   //   return this.userRepository.findAll({ where: { id } });
   // }

@@ -53,6 +53,10 @@ module.exports = {
           key: 'id',
         },
       },
+      total: {
+        type: Sequelize.REAL,
+        allowNull: false,
+      }
     });
     
   },

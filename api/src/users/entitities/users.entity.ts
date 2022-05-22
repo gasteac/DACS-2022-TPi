@@ -1,4 +1,6 @@
-import { Table, Column, Model, Unique, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, Unique, ForeignKey, HasOne, BelongsToMany } from 'sequelize-typescript';
+import { Pack } from 'src/packages/entitities/packages.entity';
+import { Sale } from 'src/sales/entitities/sale.entity';
 import { Role } from './rols.entity';
 
 @Table({ tableName: 'Users', timestamps: false })
@@ -26,6 +28,9 @@ export class User extends Model {
   @Column
   roleId: number;
 
-  //   @HasOne(() => Rol)
-  //   role: Rol;
+  @BelongsToMany(() => Pack, () => Sale)
+  sales: Pack[];
+
+  // @HasOne(() => Role)
+  // role: Role;
 }
