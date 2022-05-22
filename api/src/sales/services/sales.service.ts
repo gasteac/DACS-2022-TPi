@@ -65,7 +65,7 @@ export class SalesService {
     if (!packageToBuy) {
       throw new UnauthorizedException('The package doesnt exist');
     }
-    const isValid = this.tourismControlService.validate({
+    const isValid = await this.tourismControlService.validate({
       cuit: user.cuit,
       fecha_incio: new Date().toISOString(),
       fecha_fin: new Date().toISOString(),
