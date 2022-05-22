@@ -10,6 +10,10 @@ export class UserService {
     private roleService: RoleService,
   ) {}
 
+  async findAll(options: any): Promise<User[]> {
+    return await this.userRepository.findAll(options);
+  }
+
   async findOne(options: any): Promise<User> {
     return await this.userRepository.findOne(options);
   }

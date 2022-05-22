@@ -8,12 +8,13 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
 import { join } from 'path';
 import { SaleModule } from 'src/sales/sales.module';
 import { MarketingController } from './controllers/Marketing.controller';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
     PackagesModule,
-    SaleModule,
+    UsersModule,
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
