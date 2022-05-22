@@ -29,6 +29,9 @@ export class ControlTourismService {
         }),
         retry(10),
         catchError((err) => {
+          if (!err.response) {
+            return of({ status: 500 });
+          }
           return of({ status: err.response.status });
         }),
       );
