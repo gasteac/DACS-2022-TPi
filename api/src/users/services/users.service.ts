@@ -1,4 +1,4 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from '../dtos/createuser.dto';
 import { User } from '../entitities/users.entity';
 import { RoleService } from './role.service';
@@ -11,7 +11,12 @@ export class UserService {
   ) {}
   
   async findOne(id: number): Promise<User> {
-    return await this.userRepository.findOne({where: {id}});
+    const user = await this.userRepository.findOne({where: {id}});
+
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+    return user;
   }
   //  async findOne(options: any): Promise<User> {
   //  return await this.userRepository.findOne(options);
@@ -45,4 +50,16 @@ export class UserService {
     await newUser.save();
     return newUser;
   }
+
+  async delete(id: number): Promise<User> {
+    const user = await this.userRepository.findOne({
+      where: {id},
+    });
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+    await user.destroy();
+    return user;
+  }
+
 }
