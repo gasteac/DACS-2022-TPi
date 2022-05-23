@@ -119,6 +119,7 @@ export class PackagesService {
       }
     }
     const packUpdate = await this.packagesRepository.findOne({ where: { id } });
+    
     if (!packUpdate) {
       throw new NotFoundException('Package does not exist');
     }

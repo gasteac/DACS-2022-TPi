@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { PackageDto } from '../dtos/Package.dto';
+import { PackageOnUpdateDto } from '../dtos/PackageOnUpdate.dto';
 import { PackagesService } from '../services/Packages.service';
 import { ReservedPackagesService } from '../services/ReservedPackages.service';
 
@@ -42,7 +43,7 @@ export class PackagesController {
   }
 
   @Patch('/:id')
-  updatePackage(@Body() pack: PackageDto, @Param('id') id: number) {
+  updatePackage(@Body() pack: PackageOnUpdateDto, @Param('id') id: number) {
     return this.packageService.update(id, pack);
   }
 
