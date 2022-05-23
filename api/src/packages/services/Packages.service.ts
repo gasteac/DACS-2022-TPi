@@ -20,6 +20,8 @@ export class PackagesService {
     private showService: ShowsService,
   ) {}
 
+
+
   async findAll(): Promise<Package[]> {
     return await this.packagesRepository.findAll({
       include: [
@@ -85,6 +87,52 @@ export class PackagesService {
       ],
     });
   }
+
+  async update(id: number, pack: any): Promise<Package> {
+    const { insuranceId, ticketId, hotelId, showId } = pack;
+    let total = 0;
+    if (insuranceId) {
+      const insurance = await this.insuranceService.findOne(insuranceId);
+      total += insurance.amount;
+      if (!insurance) {
+        throw new UnauthorizedException('Invalid insurance');
+      }
+    }
+    if (ticketId) {
+      const ticket = await this.ticketService.findOne(ticketId);
+      total += ticket.amount;
+      if (!ticket) {
+        throw new UnauthorizedException('Invalid ticket');
+      }
+    }
+    if (hotelId) {
+      const hotel = await this.hotelService.findOne(hotelId);
+      if (!hotel) {
+        throw new UnauthorizedException('Invalid hotel');
+      }
+    }
+    if (showId) {
+      const show = await this.showService.findOne(showId);
+      total += show.amount;
+      if (!show) {
+        throw new UnauthorizedException('Invalid show');
+      }
+    }
+    const packUpdate = await this.packagesRepository.findOne({ where: { id } });
+    if (!packUpdate) {
+      throw new NotFoundException('Package does not exist');
+    }
+    packUpdate.name = pack.name;
+    packUpdate.quantPeople = pack.quantPeople;
+    packUpdate.insuranceId = pack.insuranceId;
+    packUpdate.ticketId = pack.ticketId;
+    packUpdate.hotelId = pack.hotelId;
+    packUpdate.showId = pack.showId;
+    packUpdate.total = total;
+    await packUpdate.save();
+    return packUpdate;
+  }
+
 
   // deletePackageById(packageId: number): string {
   //   return this.packagesRepository.delete({ where: { packageId } });
