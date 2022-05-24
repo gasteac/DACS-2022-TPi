@@ -20,6 +20,8 @@ export class PackagesService {
     private showService: ShowsService,
   ) {}
 
+
+
   async findAll(): Promise<Package[]> {
     return await this.packagesRepository.findAll({
       include: [
@@ -85,6 +87,64 @@ export class PackagesService {
       ],
     });
   }
+
+  async update(id: number, pack: any): Promise<Package> {
+    const { insuranceId, ticketId, hotelId, showId } = pack;
+
+    const packToUpdate = await this.findOne(id);
+    let total = 0;
+
+    if (!packToUpdate) {
+      throw new NotFoundException('Package does not exist');
+    }
+    if (insuranceId) {
+      const insurance = await this.insuranceService.findOne(insuranceId);
+      total += insurance.amount;
+      if (!insurance) {
+        throw new UnauthorizedException('Invalid insurance');
+      }
+    }else{
+      total += packToUpdate.insurance ? packToUpdate.insurance.amount : 0;
+    }
+
+    if (ticketId) {
+      const ticket = await this.ticketService.findOne(ticketId);
+      total += ticket.amount;
+      if (!ticket) {
+        throw new UnauthorizedException('Invalid ticket');
+      }
+    }else{
+      total += packToUpdate.ticket ? packToUpdate.ticket.amount : 0;
+    }
+
+    if (hotelId) {
+      const hotel = await this.hotelService.findOne(hotelId);
+      if (!hotel) {
+        throw new UnauthorizedException('Invalid hotel');
+      }
+    }
+
+    if (showId) {
+      const show = await this.showService.findOne(showId);
+      total += show.amount;
+      if (!show) {
+        throw new UnauthorizedException('Invalid show');
+      }
+    }else{
+      total += packToUpdate.show ? packToUpdate.show.amount : 0;
+    }
+    
+    packToUpdate.name = pack.name;
+    packToUpdate.quantPeople = pack.quantPeople;
+    packToUpdate.insuranceId = pack.insuranceId;
+    packToUpdate.ticketId = pack.ticketId;
+    packToUpdate.hotelId = pack.hotelId;
+    packToUpdate.showId = pack.showId;
+    packToUpdate.total = total;
+    await packToUpdate.save();
+    return packToUpdate;
+  }
+
 
   // deletePackageById(packageId: number): string {
   //   return this.packagesRepository.delete({ where: { packageId } });

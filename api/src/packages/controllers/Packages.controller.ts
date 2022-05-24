@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { PackageDto } from '../dtos/Package.dto';
+import { PackageOnUpdateDto } from '../dtos/PackageOnUpdate.dto';
 import { PackagesService } from '../services/Packages.service';
 import { ReservedPackagesService } from '../services/ReservedPackages.service';
 
@@ -21,12 +22,17 @@ export class PackagesController {
   // createInsurance(@Body() insurance: any) {
   //   return this.packageService.createInsurance(insurance);
   // }
-  @Get()
+  @Get('/')
   getAllPackages() {
     return this.packageService.findAll();
   }
 
-  @Post()
+  @Get('/:id')
+  getPackageById(@Param('id') id: number) {
+    return this.packageService.findOne(id);
+  }
+
+  @Post('/')
   createPackage(@Body() tourismPackage: PackageDto) {
     return this.packageService.create(tourismPackage);
   }
@@ -35,4 +41,11 @@ export class PackagesController {
   deletePackageById(@Param('packageId') packageId: number) {
     return this.packageService.delete(packageId);
   }
+
+  @Patch('/:id')
+  updatePackage(@Body() pack: PackageOnUpdateDto, @Param('id') id: number) {
+    return this.packageService.update(id, pack);
+  }
+
 }
+
