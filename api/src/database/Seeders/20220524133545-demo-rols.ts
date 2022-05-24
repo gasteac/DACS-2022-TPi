@@ -16,6 +16,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('rols', null, {})
+    return queryInterface.bulkDelete('rols', null, {})
   }
 };
