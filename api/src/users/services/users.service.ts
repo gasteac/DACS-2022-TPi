@@ -11,7 +11,7 @@ export class UserService {
     private roleService: RoleService,
   ) {}
   
-  async findOne(id: number): Promise<User> {
+  async findOne(id: any): Promise<User> {
     const user = await this.userRepository.findOne({where: {id}, include: [Role]});
 
     if (!user) {
@@ -19,17 +19,11 @@ export class UserService {
     }
     return user;
   }
-  //  async findOne(options: any): Promise<User> {
-  //  return await this.userRepository.findOne(options);
 
   // BUSAR TODOS LOS USUARIOS NO ES NECESARIO PERO QUERIA PROBAR :)
   async findAll(options: any): Promise<User[]> {
     return await this.userRepository.findAll(options);
   }
-  
-  // async findAll(id: number): Promise<User[]> {
-  //   return this.userRepository.findAll({ where: { id } });
-  // }
 
   async create(user: CreateUserDto): Promise<any> {
     let { roleId } = user;
