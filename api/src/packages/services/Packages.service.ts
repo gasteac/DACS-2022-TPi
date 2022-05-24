@@ -90,6 +90,7 @@ export class PackagesService {
 
   async update(id: number, pack: any): Promise<Package> {
     const { insuranceId, ticketId, hotelId, showId } = pack;
+    const packToUpdate = await this.packagesRepository.findOne({ where: { id } });
     let total = 0;
     if (insuranceId) {
       const insurance = await this.insuranceService.findOne(insuranceId);
@@ -97,6 +98,9 @@ export class PackagesService {
       if (!insurance) {
         throw new UnauthorizedException('Invalid insurance');
       }
+    }else{
+      const insurance = await this.insuranceService.findOne(packToUpdate.insuranceId);
+      total += insurance.amount;
     }
     if (ticketId) {
       const ticket = await this.ticketService.findOne(ticketId);
@@ -104,6 +108,9 @@ export class PackagesService {
       if (!ticket) {
         throw new UnauthorizedException('Invalid ticket');
       }
+    }else{
+      const ticket = await this.ticketService.findOne(packToUpdate.ticketId);
+      total += ticket.amount;
     }
     if (hotelId) {
       const hotel = await this.hotelService.findOne(hotelId);
@@ -111,13 +118,18 @@ export class PackagesService {
         throw new UnauthorizedException('Invalid hotel');
       }
     }
+
     if (showId) {
       const show = await this.showService.findOne(showId);
       total += show.amount;
       if (!show) {
         throw new UnauthorizedException('Invalid show');
       }
+    }else{
+      const show = await this.showService.findOne(packToUpdate.showId);
+      total += show.amount;
     }
+
     const packUpdate = await this.packagesRepository.findOne({ where: { id } });
     
     if (!packUpdate) {
