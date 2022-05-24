@@ -26,7 +26,7 @@ module.exports = {
       },
       {
         seat: 25,
-        departureDate: '2022-12-12 08:00:00',
+        departureDate: '2021-12-12 08:00:00',
         returnDate: '2022-12-13 08:00:00',
         travelWayId: 4,
         amount: 1500,
