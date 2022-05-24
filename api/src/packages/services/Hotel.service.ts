@@ -36,7 +36,6 @@ export class HotelService {
     return hotel;
   }
   async update(id: number, hotel: any): Promise<Hotel> {
-    const { name, address, phone } = hotel;
     const HotelOnUpdate = await this.findOne(id);
     if (!HotelOnUpdate) {
       throw new NotFoundException('Hotel does not exist');
