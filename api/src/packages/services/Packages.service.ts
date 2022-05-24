@@ -90,8 +90,13 @@ export class PackagesService {
 
   async update(id: number, pack: any): Promise<Package> {
     const { insuranceId, ticketId, hotelId, showId } = pack;
-    const packToUpdate = await this.packagesRepository.findOne({ where: { id } });
+
+    const packToUpdate = await this.findOne(id);
     let total = 0;
+
+    if (!packToUpdate) {
+      throw new NotFoundException('Package does not exist');
+    }
     if (insuranceId) {
       const insurance = await this.insuranceService.findOne(insuranceId);
       total += insurance.amount;
@@ -99,9 +104,9 @@ export class PackagesService {
         throw new UnauthorizedException('Invalid insurance');
       }
     }else{
-      const insurance = await this.insuranceService.findOne(packToUpdate.insuranceId);
-      total += insurance.amount;
+      total += packToUpdate.insurance ? packToUpdate.insurance.amount : 0;
     }
+
     if (ticketId) {
       const ticket = await this.ticketService.findOne(ticketId);
       total += ticket.amount;
@@ -109,9 +114,9 @@ export class PackagesService {
         throw new UnauthorizedException('Invalid ticket');
       }
     }else{
-      const ticket = await this.ticketService.findOne(packToUpdate.ticketId);
-      total += ticket.amount;
+      total += packToUpdate.ticket ? packToUpdate.ticket.amount : 0;
     }
+
     if (hotelId) {
       const hotel = await this.hotelService.findOne(hotelId);
       if (!hotel) {
@@ -126,24 +131,18 @@ export class PackagesService {
         throw new UnauthorizedException('Invalid show');
       }
     }else{
-      const show = await this.showService.findOne(packToUpdate.showId);
-      total += show.amount;
+      total += packToUpdate.show ? packToUpdate.show.amount : 0;
     }
-
-    const packUpdate = await this.packagesRepository.findOne({ where: { id } });
     
-    if (!packUpdate) {
-      throw new NotFoundException('Package does not exist');
-    }
-    packUpdate.name = pack.name;
-    packUpdate.quantPeople = pack.quantPeople;
-    packUpdate.insuranceId = pack.insuranceId;
-    packUpdate.ticketId = pack.ticketId;
-    packUpdate.hotelId = pack.hotelId;
-    packUpdate.showId = pack.showId;
-    packUpdate.total = total;
-    await packUpdate.save();
-    return packUpdate;
+    packToUpdate.name = pack.name;
+    packToUpdate.quantPeople = pack.quantPeople;
+    packToUpdate.insuranceId = pack.insuranceId;
+    packToUpdate.ticketId = pack.ticketId;
+    packToUpdate.hotelId = pack.hotelId;
+    packToUpdate.showId = pack.showId;
+    packToUpdate.total = total;
+    await packToUpdate.save();
+    return packToUpdate;
   }
 
 
