@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { HotelDto } from '../dtos/Hotel.dto';
+import { HotelDto, HotelOnUpdateDto } from '../dtos/Hotel.dto';
 import { Hotel } from '../entitities/hotel.entity';
 
 @Injectable()
@@ -34,5 +34,16 @@ export class HotelService {
     }
     await hotel.destroy();
     return hotel;
+  }
+  async update(id: number, hotel: any): Promise<Hotel> {
+    const HotelOnUpdate = await this.findOne(id);
+    if (!HotelOnUpdate) {
+      throw new NotFoundException('Hotel does not exist');
+    }
+    HotelOnUpdate.name = hotel.name;
+    HotelOnUpdate.address = hotel.address;
+    HotelOnUpdate.phone = hotel.phone;
+    await HotelOnUpdate.save();
+    return HotelOnUpdate;
   }
 }
