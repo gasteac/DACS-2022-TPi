@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { MarketingModule } from './marketing/Marketing.module';
 import { SaleModule } from './sales/sales.module';
+import { AuthModule } from './auth/modules/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { SaleModule } from './sales/sales.module';
     MarketingModule,
     DatabaseModule,
     SaleModule,
+    AuthModule,
     ConfigModule.forRoot(),
   ],
   controllers: [AppController],
