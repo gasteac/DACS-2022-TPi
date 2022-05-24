@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { PackageDto } from '../dtos/Package.dto';
-import { PackageOnUpdateDto } from '../dtos/PackageOnUpdate.dto';
+import { PackageDto, PackageOnUpdateDto } from '../dtos/Package.dto';
 import { PackagesService } from '../services/Packages.service';
 import { ReservedPackagesService } from '../services/ReservedPackages.service';
 
