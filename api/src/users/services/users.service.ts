@@ -1,5 +1,6 @@
 import { Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from '../dtos/createuser.dto';
+import { Role } from '../entitities/rols.entity';
 import { User } from '../entitities/users.entity';
 import { RoleService } from './role.service';
 
@@ -11,7 +12,7 @@ export class UserService {
   ) {}
   
   async findOne(id: number): Promise<User> {
-    const user = await this.userRepository.findOne({where: {id}});
+    const user = await this.userRepository.findOne({where: {id}, include: [Role]});
 
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
@@ -30,7 +31,7 @@ export class UserService {
   //   return this.userRepository.findAll({ where: { id } });
   // }
 
-  async create(user: CreateUserDto): Promise<User> {
+  async create(user: CreateUserDto): Promise<any> {
     let { roleId } = user;
     const roles = await this.roleService.findAll();
     const exist = await this.userRepository.findOne({
@@ -47,7 +48,7 @@ export class UserService {
         throw new UnauthorizedException('Invalid role');
       }
     }
-    const newUser = new User({ ...user, roleId });
+    const newUser = await this.userRepository.create({ ...user, roleId });
     await newUser.save();
     return newUser;
   }
