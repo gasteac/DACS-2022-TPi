@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { InsuranceDto } from '../dtos/Insurances.dto';
 import { InsuranceService } from '../services/Insurance.service';
 
@@ -14,5 +14,15 @@ export class InsurancesController {
   @Post('/')
   createInsurance(@Body() insurance: InsuranceDto) {
     return this.insuranceService.create(insurance);
+  }
+
+  @Get('/')
+  findAllInsurances() {
+    return this.insuranceService.findAll();
+  }
+
+  @Get('/:insuranceId')
+  findInsuranceById(@Param('insuranceId') insuranceId: number) {
+    return this.insuranceService.findOne(insuranceId);
   }
 }

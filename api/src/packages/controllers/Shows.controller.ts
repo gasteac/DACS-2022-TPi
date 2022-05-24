@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ShowDto } from '../dtos/Shows.dto';
 import { ShowsService } from '../services/Shows.service';
 
@@ -14,5 +14,15 @@ export class ShowsController {
   @Post('/')
   createShow(@Body() show: ShowDto) {
     return this.showService.create(show);
+  }
+
+  @Get('/')
+  findAllShows() {
+    return this.showService.findAll();
+  }
+
+  @Get('/:showId')
+  findShowById(@Param('showId') showId: number) {
+    return this.showService.findOne(Number(showId));
   }
 }
