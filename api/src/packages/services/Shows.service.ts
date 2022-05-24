@@ -13,6 +13,10 @@ export class ShowsService {
     return await this.showRepository.findByPk(id);
   }
 
+  async findAll(options?: any): Promise<Show[]> {
+    return await this.showRepository.findAll(options);
+  }
+
   async create(show: ShowDto): Promise<Show> {
     const newShow = await this.showRepository.create({ ...show });
     await newShow.save();

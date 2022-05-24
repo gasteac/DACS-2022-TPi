@@ -4,6 +4,7 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { TicketDto } from '../dtos/Tickets.dto';
 import { Ticket } from '../entitities/tickets.entity';
 import { TravelWay } from '../entitities/travelWays.entity';
 import { TravelWaysService } from './TravelWays.service';
@@ -20,8 +21,11 @@ export class TicketService {
     return await this.ticketRepository.findOne({ where: { id } });
   }
 
-  async findAll(): Promise<Ticket[]> {
-    return await this.ticketRepository.findAll({ include: TravelWay });
+  async findAll(options?: any): Promise<Ticket[]> {
+    return await this.ticketRepository.findAll({
+      ...options,
+      include: TravelWay,
+    });
   }
 
   async delete(id: number): Promise<Ticket> {
@@ -33,7 +37,7 @@ export class TicketService {
     return ticket;
   }
 
-  async create(ticket: any): Promise<Ticket> {
+  async create(ticket: TicketDto): Promise<Ticket> {
     const { travelWayId } = ticket;
     const travelWays = await this.travelWaysService.findAll();
     if (!travelWayId) {

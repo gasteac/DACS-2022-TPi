@@ -9,6 +9,10 @@ export class InsuranceService {
     private insuranceRepository: typeof Insurance,
   ) {}
 
+  async findAll(options?: any): Promise<Insurance[]> {
+    return await this.insuranceRepository.findAll(options);
+  }
+
   async create(insurance: InsuranceDto): Promise<Insurance> {
     const newInsurance = await this.insuranceRepository.create({
       ...insurance,

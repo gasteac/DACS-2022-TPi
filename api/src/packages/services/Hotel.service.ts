@@ -9,8 +9,8 @@ export class HotelService {
     private hotelRepository: typeof Hotel,
   ) {}
 
-  async findAll(): Promise<Hotel[]> {
-    return this.hotelRepository.findAll();
+  async findAll(options?: any): Promise<Hotel[]> {
+    return this.hotelRepository.findAll(options);
   }
 
   async findOne(id: number): Promise<Hotel> {
