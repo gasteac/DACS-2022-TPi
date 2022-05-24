@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ShowDto } from '../dtos/Shows.dto';
 import { ShowsService } from '../services/Shows.service';
 
@@ -24,5 +24,10 @@ export class ShowsController {
   @Get('/:showId')
   findShowById(@Param('showId') showId: number) {
     return this.showService.findOne(Number(showId));
+  }
+
+  @Patch('/:showId')
+  updateShowById(@Param('showId') showId: number, @Body() show: ShowDto) {
+    //return this.showService.update(Number(showId), show);
   }
 }
