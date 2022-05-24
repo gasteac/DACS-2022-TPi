@@ -11,6 +11,11 @@ export class HotelController {
     return await this.hotelService.findAll();
   }
 
+  @Get('/:idHotel')
+  async findHotelById(@Param('idHotel') id: number) {
+    return await this.hotelService.findOne(id);
+  }
+
   @Delete('/:idHotel')
   async deleteHotel(@Param('idHotel') id: number) {
     return await this.hotelService.delete(id);

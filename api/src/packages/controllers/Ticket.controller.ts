@@ -11,6 +11,11 @@ export class TicketsController {
     return this.ticketsService.findAll();
   }
 
+  @Get('/:ticketId')
+  getTicketById(@Param('ticketId') ticketId: number) {
+    return this.ticketsService.findOne(ticketId);
+  }
+
   @Post()
   createTicket(@Body() ticket: TicketDto) {
     return this.ticketsService.create(ticket);
