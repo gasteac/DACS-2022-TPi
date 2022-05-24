@@ -1,4 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Role } from 'src/auth/enums/role.enum';
+import { RolesGuard } from 'src/auth/guards/roles.guards';
+import { Roles } from 'src/decorators/roles.decorator';
 import { PackageDto, PackageOnUpdateDto } from '../dtos/Package.dto';
 import { PackagesService } from '../services/Packages.service';
 import { ReservedPackagesService } from '../services/ReservedPackages.service';
@@ -22,6 +25,7 @@ export class PackagesController {
   //   return this.packageService.createInsurance(insurance);
   // }
   @Get('/')
+  @Roles(Role.Admin)
   getAllPackages() {
     return this.packageService.findAll();
   }
