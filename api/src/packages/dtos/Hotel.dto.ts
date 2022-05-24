@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class HotelDto {
   @IsString()
@@ -7,6 +7,21 @@ export class HotelDto {
   @IsString()
   address: string;
 
+  @IsNumber()
+  phone: number;
+}
+
+
+export class HotelOnUpdateDto {
+  @IsOptional() 
+  @IsString()
+  name: string;
+
+  @IsOptional() 
+  @IsString()
+  address: string;
+
+  @IsOptional() 
   @IsNumber()
   phone: number;
 }
