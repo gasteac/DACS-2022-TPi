@@ -28,6 +28,6 @@ export class ShowsController {
 
   @Patch('/:showId')
   updateShowById(@Param('showId') showId: number, @Body() show: ShowOnUpdateDto) {
-    //return this.showService.update(Number(showId), show);
+    return this.showService.update(showId, show);
   }
 }

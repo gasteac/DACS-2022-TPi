@@ -31,4 +31,19 @@ export class ShowsService {
     await show.destroy();
     return show;
   }
+
+  async update(id: number, show: any): Promise<Show> {
+    const showToUpdate = await this.findOne(id);
+    if (!showToUpdate) {
+      throw new NotFoundException('Show not found');
+    }
+
+    showToUpdate.name = show.name;
+    showToUpdate.seat = show.seat;
+    showToUpdate.dateShow = show.dateShow;
+    showToUpdate.amount = show.amount;
+
+    await showToUpdate.update(show);
+    return showToUpdate;
+  }
 }
