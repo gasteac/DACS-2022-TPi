@@ -36,5 +36,16 @@ export class InsuranceService {
     }
     await insurance.destroy();
     return insurance;
+    
+  }
+  async update(id: number, insurance: any): Promise<Insurance> {
+    const insuranceToUpdate = await this.findOne(id);
+   if (!insuranceToUpdate) {
+    throw new NotFoundException('Insurance not found');
+   }
+  insuranceToUpdate.name = insurance.name;
+  insuranceToUpdate.amount = insurance.amount;
+  await insuranceToUpdate.save();
+  return insuranceToUpdate;
   }
 }

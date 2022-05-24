@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Patch } from '@nestjs/common';
+import { InsuranceOnUpdateDto } from '../dtos/InsuranceOnUpdate.dto';
 import { InsuranceDto } from '../dtos/Insurances.dto';
 import { InsuranceService } from '../services/Insurance.service';
 
@@ -24,5 +25,10 @@ export class InsurancesController {
   @Get('/:insuranceId')
   findInsuranceById(@Param('insuranceId') insuranceId: number) {
     return this.insuranceService.findOne(insuranceId);
+  }
+
+  @Patch('/:id')
+  updateInsurance(@Body() insurance: InsuranceOnUpdateDto, @Param('id') id: number) {
+    return this.insuranceService.update(id, insurance);
   }
 }
