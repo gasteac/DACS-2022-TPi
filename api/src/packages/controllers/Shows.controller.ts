@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { ShowDto } from '../dtos/Shows.dto';
+import { ShowDto, ShowOnUpdateDto } from '../dtos/Shows.dto';
 import { ShowsService } from '../services/Shows.service';
 
 @Controller('shows')
@@ -27,7 +27,7 @@ export class ShowsController {
   }
 
   @Patch('/:showId')
-  updateShowById(@Param('showId') showId: number, @Body() show: ShowDto) {
+  updateShowById(@Param('showId') showId: number, @Body() show: ShowOnUpdateDto) {
     //return this.showService.update(Number(showId), show);
   }
 }
