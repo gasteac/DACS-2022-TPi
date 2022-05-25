@@ -1,4 +1,9 @@
-import { Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateUserDto } from '../dtos/createuser.dto';
 import { Role } from '../entitities/rols.entity';
 import { User } from '../entitities/users.entity';
@@ -10,9 +15,12 @@ export class UserService {
     @Inject('USER_REPOSITORY') private userRepository: typeof User,
     private roleService: RoleService,
   ) {}
-  
+
   async findOne(id: any): Promise<User> {
-    const user = await this.userRepository.findOne({where: {id}, include: [Role]});
+    const user = await this.userRepository.findOne({
+      where: { id },
+      include: [Role],
+    });
 
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
@@ -49,7 +57,7 @@ export class UserService {
 
   async delete(id: number): Promise<User> {
     const user = await this.userRepository.findOne({
-      where: {id},
+      where: { id },
     });
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
@@ -57,5 +65,4 @@ export class UserService {
     await user.destroy();
     return user;
   }
-
 }

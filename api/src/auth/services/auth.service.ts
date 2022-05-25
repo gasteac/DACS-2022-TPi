@@ -7,7 +7,6 @@ import { User } from 'src/users/entitities/users.entity';
 import { UserService } from 'src/users/services/users.service';
 import { RegisterUserDto } from '../dto/auth.dto';
 
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -19,7 +18,7 @@ export class AuthService {
     return await this.usersService.create(user as CreateUserDto);
   }
 
-  async validateUser(email: string, password: string): Promise<User> { 
+  async validateUser(email: string, password: string): Promise<User> {
     const user = await this.usersService.findOne(email);
     //const isValid = await bcrypt.compare(pass, user.password);
     // if (user && isValid) {
@@ -36,5 +35,4 @@ export class AuthService {
       access_token: this.jwtService.sign(payload),
     };
   }
-
 }
